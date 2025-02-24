@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Warung Madura 24 Jam | Login</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="../assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../assets/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../assets/bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../assets/dist/css/AdminLTE.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="../assets/plugins/iCheck/square/blue.css">
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background: linear-gradient(135deg, #FFA500, #8B4513);
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      overflow: hidden; /* Untuk menghindari scroll */
+    }
+
+    /* Container untuk efek toko */
+    .shop-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    /* Atap toko menggunakan gambar */
+    .roof {
+      position: absolute;
+      top: -100px; /* Sesuaikan posisi atap */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150%; /* Sesuaikan ukuran atap */
+      height: 150px; /* Sesuaikan tinggi atap */
+      background: url('../assets/images/roof.png') no-repeat center center;
+      background-size: contain; /* Pastikan gambar sesuai dengan container */
+      z-index: 1;
+    }
+
+    /* Lampu */
+    .lamp {
+      position: absolute;
+      top: -30px;
+      width: 30px;
+      height: 30px;
+      background: #FFD700;
+      border-radius: 50%;
+      box-shadow: 0 0 20px #FFD700;
+      z-index: 2;
+    }
+
+    .lamp.left {
+      left: 20px;
+    }
+
+    .lamp.right {
+      right: 20px;
+    }
+
+    /* Kotak login */
+    .login-box {
+      position: relative;
+      width: 100%;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      animation: fadeIn 1s ease-in-out;
+      z-index: 3;
+    }
+
+    /* Orang-orang di belakang */
+    .people {
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 100px;
+      background: url('https://via.placeholder.com/400x100') no-repeat center center;
+      background-size: cover;
+      z-index: 0;
+    }
+
+    /* Animasi fadeIn */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* CSS untuk form login */
+    .login-logo {
+      text-align: center;
+      padding: 20px;
+      background: #FFA500;
+      color: #fff;
+    }
+
+    .login-logo a {
+      color: #fff;
+      font-size: 28px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .login-box-body {
+      padding: 20px;
+    }
+
+    .login-box-msg {
+      margin: 0;
+      text-align: center;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .form-control:focus {
+      border-color: #FFA500;
+      box-shadow: none;
+    }
+
+    .btn-primary {
+      background: #FFA500;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: #8B4513;
+    }
+
+    .social-auth-links {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .social-auth-links a {
+      color: #FFA500;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .social-auth-links a:hover {
+      color: #8B4513;
+    }
+  </style>
+</head>
+<body class="hold-transition login-page">
+<div class="shop-container">
+  <!-- Atap toko menggunakan gambar -->
+  <div class="roof"></div>
+
+  <!-- Lampu -->
+  <div class="lamp left"></div>
+  <div class="lamp right"></div>
+
+  <!-- Kotak login -->
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="../assets/index2.html"><b>Warung Madura</b> 24 Jam</a>
+    </div>
+    <div class="login-box-body">
+     <?php 
+     if (isset($_GET['pesan'])){
+     if($_GET['pesan'] == "gagal"){
+      echo "<div class='allert'>Login Gagal, Username dan Password Salah!</div>";
+     }
+     elseif($_GET['pesan'] == "logout"){
+      echo "<div class='allert'>Anda Berhasil Logout!</div>";
+      } 
+     }
+     ?>
+
+      <form action="cek_login.php" method="post">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Username" name="username" required>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Password" name="password" required>
+        </div>
+        <div class="form-group">
+          <select name="role" id="role" class="form-control" required>
+            <option value="admin">Admin</option>
+            <option value="kasir">Kasir</option>
+          </select>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-primary">Sign In</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="social-auth-links text-center">
+        <p>- OR -</p>
+        <a href="register.html" class="text-center">Daftar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Orang-orang di belakang -->
+  <div class="people"></div>
+</div>
+
+<!-- jQuery 3 -->
+<script src="../assets/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="../assets/plugins/iCheck/icheck.min.js"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' /* optional */
+    });
+  });
+</script>
+</body>
+</html>

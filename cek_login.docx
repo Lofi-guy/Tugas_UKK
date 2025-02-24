@@ -1,0 +1,32 @@
+<?php
+session_start();
+include "config/koneksi.php";
+
+if (!isset($_POST['username'], $_POST['password'])) {
+    header("Location: index.php?pesan=gagal");
+    exit();
+}
+
+$username = strtolower(trim(mysqli_real_escape_string($koneksi, $_POST['username'])));
+$password = trim(mysqli_real_escape_string($koneksi, $_POST['password']));
+
+// Cek apakah password di database disimpan dalam bentuk hash MD5
+$query = "SELECT * FROM tb_user WHERE username='$username'";
+$result = mysqli_query($koneksi, $query);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $data = mysqli_fetch_assoc($result);
+    
+    // Verifikasi password dengan MD5
+    if ($data['password'] === md5($password)) {
+        $_SESSION['UserID'] = $data['UserID'];
+        $_SESSION['username'] = $data['username'];
+        $_SESSION['role'] = $data['Role'];
+        header("Location: admin/index.php");
+        exit();
+    }
+}
+
+// Jika login gagal
+header("Location: index.php?pesan=gagal");
+exit();
